@@ -166,4 +166,29 @@ Si la validación es exitosa, el servidor da acceso al usuario a los recursos so
 
 # se instala  npm i moment
 
+# Publicacion del backend en internet usando Railway, pero primero 
+# se usa github porque la actualizacion en produccion se hara automaticamente cuando se suba a github
+
+# github
+# git init 
+# git add .
+# git commit -m "First commit"
+
+# git remote add origin https://github.com/JorgeRodriguez33/React-MERN-backend.git
+# git branch -M main   -> renombra la rama donde se esta parado
+# git push -u origin main  -> "git push" sube las cosas a github , "-u origin main" pone como defecto el orgin el "main"
+
+
+# Railway para desplegar, es gratuito
+# en la web de Railway se registra usando la cuanta de github
+
+# para agregar las variables de entorno se puede dar en raw editor y se copia y pega tal cual los de env
+# el PORT 4000 no es necesario porque Railway ya lo proporciona
+
+# luego de hacer el deploy, en settings se puede ver la url que se nos dio
+
+# En Networking
+# Public Networking , se puede  generar un nuevo dominio
+
+
 \```

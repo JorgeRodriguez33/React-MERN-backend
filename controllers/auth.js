@@ -212,6 +212,7 @@ const revalidarToken = async(req, response = express.response) => {
   // La respuesta incluye un indicador de éxito (ok: true) y el nuevo token generado.
   res.json({
       ok: true,  // Indica que la operación fue exitosa
+      uid, name,
       token      // Devuelve el nuevo token JWT al cliente
   });
 };

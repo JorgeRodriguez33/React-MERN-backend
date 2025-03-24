@@ -1,3 +1,5 @@
+const path = require('path');
+
 const express = require("express");
 require("dotenv").config(); //me importo el dotenv
 const { dbConnection } = require('./database/config');
@@ -20,6 +22,15 @@ dbConnection();
 // 'app.use(cors())' aplica las configuraciones predeterminadas de CORS, permitiendo que otros dominios accedan a nuestra API
 // Por defecto, esto habilita el acceso desde cualquier origen, pero podemos configurar restricciones (por ejemplo, dominios específicos)
 app.use(cors()); // Importante que vaya antes de app.use(express.json()); !!!!
+
+
+// Directorio publico
+/* 
+En Express.js, un middleware es una función que se ejecuta durante el ciclo de vida de una solicitud antes 
+de que llegue a su manejador final. Los middleware pueden modificar la solicitud (req), la respuesta (res) o 
+terminar la solicitud. */
+app.use(express.static("public")); //indico el path de donde esta el directorio publico que se creo, pero como esta en el mismo directorio, basta con poner "public"
+
 
 
 
@@ -47,14 +58,20 @@ app.use("/api/auth",require("./routes/auth"));
 
 app.use("/api/events",require("./routes/events"));
 
-/***********************************************************/
+/* Middleware para manejar rutas no disponibles.  
+   Si el usuario intenta acceder a un directorio o ruta que no existe,  
+   se redirigirá automáticamente a la página principal (index.html)  
+   para evitar errores y mejorar la experiencia de navegación. */
+app.use('*',(req, res) =>{
 
-// Directorio publico
-/* 
-En Express.js, un middleware es una función que se ejecuta durante el ciclo de vida de una solicitud antes 
-de que llegue a su manejador final. Los middleware pueden modificar la solicitud (req), la respuesta (res) o 
-terminar la solicitud. */
-app.use(express.static("public")); //indico el path de donde esta el directorio publico que se creo, pero como esta en el mismo directorio, basta con poner "public"
+    // Envia el archivo 'index.html' ubicado en la carpeta 'public' como respuesta.
+    // __dirname: Representa el directorio actual donde se ejecuta el script.
+    // path.join(__dirname, 'public/index.html'): Construye la ruta absoluta al archivo 'index.html'.
+    // res.sendFile(): Envía el archivo especificado al cliente como respuesta HTTP.
+    res.sendFile(path.join( __dirname, 'public/index.html'));
+})
+
+/***********************************************************/
 
 
 
